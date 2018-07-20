@@ -1,0 +1,38 @@
+buildscript {
+    apply from: 'build-versions.gradle'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath(group: 'org.springframework.boot', name:'spring-boot-gradle-plugin', version: versions.spring_boot)
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+apply from: 'build-versions.gradle'
+
+dependencies {
+    compile(group: 'org.springframework.boot', name:'spring-boot-starter-web', version: versions.spring_boot)
+    compile(group: 'com.google.code.gson', name:'gson', version: versions.gson)
+
+    testCompile (group: "junit", name: "junit", version: versions.junit)
+    testCompile (group: "org.mockito", name: "mockito-core", version: versions.mockito)
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'co.morillas.gramgames.Main'
+    }
+}
